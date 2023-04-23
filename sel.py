@@ -1,7 +1,7 @@
 from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+# from selenium.webdriver.common.by import By
+# from selenium.webdriver.support.wait import WebDriverWait
+# from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
@@ -19,7 +19,12 @@ driver.get("https://www.zefoy.com/")
 driver.implicitly_wait(10)
 
 def viewIncreaser():
-
+    
+    def enterUrl():
+        userUrl = input("Enter the URL here: ")
+        
+        addViews(userUrl)
+        
     def enterCode():
         def saveCode():
             capRead = driver.find_element('xpath',"/html/body/div[5]/div[2]/form/div/div/img")
@@ -44,7 +49,7 @@ def viewIncreaser():
                     break
         saveCode()
 
-    def addViews():
+    def addViews(userUrl):
         def enterViews():
             enterCode()
             viewsBtns = driver.find_elements('xpath', '/html/body/div[6]/div/div[2]/div/div/div[5]/div/button')
@@ -58,8 +63,9 @@ def viewIncreaser():
                 driver.refresh()
                 print("Captcha Error")
                 enterViews()
+
         def addUrl():
-            tiktokUrl = input("Enter the URL here: ")
+            tiktokUrl = userUrl
             urlWrite = driver.find_element('xpath',"/html/body/div[10]/div/form/div/input")
             urlWrite.clear()
             urlWrite.send_keys(tiktokUrl)            
@@ -75,19 +81,21 @@ def viewIncreaser():
 
         def counterReady():
             getReadyBtns = driver.find_elements('xpath', '/html/body/div[10]/div/div/div[1]/div/form/button')
-            
-            for getReadyBtn in getReadyBtns:
-                if bool(getReadyBtns):
-                    getReadyBtn.click()
-                    time.sleep(120)
-                    submitUrl()
-                    break
-                else:
-                    time.sleep(120)
-                    submitUrl()
+            if bool(getReadyBtns):
+
+                for getReadyBtn in getReadyBtns:
+                    if bool(getReadyBtns):
+                        getReadyBtn.click()
+                        time.sleep(120)
+                        print("again")
+                        submitUrl()
+                        break
+            else:
+                time.sleep(120)
+                submitUrl()
 
         enterViews()
     
-    addViews()
+    enterUrl()
 
 viewIncreaser()
