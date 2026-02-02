@@ -5,7 +5,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
-import pytesseract 
+import pytesseract
 import PIL.Image
 import time
 
@@ -52,7 +52,7 @@ def viewIncreaser():
     def addViews(userUrl):
         def enterViews():
             enterCode()
-            viewsBtns = driver.find_elements('xpath', '/html/body/div[6]/div/div[2]/div/div/div[5]/div/button')
+            viewsBtns = driver.find_elements('xpath', '/html/body/div[6]/div/div[2]/div/div/div[3]/div/button')
             if (bool(viewsBtns)):
                 for viewsBtn in viewsBtns:
                     if bool(viewsBtns):
